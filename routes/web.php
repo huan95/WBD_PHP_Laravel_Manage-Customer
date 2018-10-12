@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::group(['prefix' => 'customers'], function (){
-    Route::get('/', 'CustomerController@index')->name('customer.index');
+use Illuminate\Support\Facades\Route;
+
+Route::group(['prefix' => 'customers'], function () {
+
+   Route::get('/list', 'CustomerController@list')->name('homeList');
+   Route::get('{id}/delete', 'CustomerController@delete')->name('customerDelete');
+   Route::get('/create', 'CustomerController@create')->name('customerCreate');
+   Route::post('/create', 'CustomerController@store')->name('customerStore');
+   Route::get('{id}/update', 'CustomerController@edit')->name('customerEdit');
+   Route::post('{id}/update', 'CustomerController@update')->name('customerUpdate');
 });
